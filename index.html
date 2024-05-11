@@ -9,20 +9,21 @@
 <body class="bg-black text-white">
   <div class="max-sm:hidden">
     <nav class="flex list-none justify-around mt-5 bg-[#2121215a] p-3 rounded-3xl max-sm:hidden">
-      <li class="hover:text-gray-400 cursor-pointer  bg-gray-400 rounded-lg p-1"><a href="./index.html">Home</a></li>
-      <li class="hover:text-gray-400 cursor-pointer"><a href="./html/About.html">About</a></li>
-      <li class="hover:text-gray-400 cursor-pointer"><a href="./html/Github.html">Github</a></li>
+      <li class="hover:text-gray-400 cursor-pointer   bg-gray-400 rounded-lg p-1"><a href="index.html">Home</a></li>
+      <li class="hover:text-gray-400 cursor-pointer"><a href="About.html">About</a></li>
+      <li class="hover:text-gray-400 cursor-pointer"><a href="Github.html">Github</a></li>
         </nav class="text-[#1D1D1B]">
         <!-- nav ends here Window-->
        <main class="">
       <div class=" mt-6 flex justify-around mx-1">
 
         <section class=" bg-[#2121215a] w-1/4 mt-3 justify-center block">
-          <h1 class="uppercase font-bold mx-20 mt-2 text-lg "> <b class="text-blue-200">Mern</b> Stack Developer</h1>
-          <li class="dynamic-text list-none p-3 justify-evenly capitalize hover:text-gray-500 ">Dynamic Text Here</li>
+          <h1 class="uppercase font-bold mx-20 mt-2 text-[1.120rem]"> <b class="text-blue-200">Mern</b> Stack Developer</h1>
+          <li class="dynamic-text list-none p-3 justify-evenly capitalize hover:text-gray-500 text-justify">Dynamic Text Here</li>
          </section>
-        <section id="avatar" class=" bg-[#2121215a] mx-2 p-2 rounded-3xl translate-x-2 hover:animate-pulse tracking-widest">
-          <img class="shadow-md rounded-2xl w-72 h-72" alt="the Image from Github">
+        <section id="avatar" class="bg-[#2121215a] mx-2 p-2 rounded-3xl translate-x-2 hover:animate-pulse tracking-widest">
+          <img class="cursor-grab shadow-md rounded-2xl w-72 h-72" alt="the Image from Github">
+          <h1 class=" w-full text-pretty text-justify font-bold font-serif m-5">Atharv Shinde</h1>
         </section>
       </div>
       <!-- Technical Skills  -->
@@ -31,37 +32,46 @@
       </div>
       <div class="container align-middle ">
         <ul class="list-none flex justify-center gap-5 mt-8">
-          <li>Android</li>
-          <li>Android</li>
-          <li>Android</li>
-          <li>Android</li>
-          <li>Android</li>
-          <li>Android</li>
+          <button class="font-mono bg-orange-500 p-2 rounded-xl hover:bg-orange-300 Tech">Javascript</button>
+          <button class="font-mono bg-orange-500 p-2 rounded-xl w-full hover:bg-orange-300 Tech">React JS</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl hover:bg-orange-300 w-screen Tech ">Express JS</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl hover:bg-orange-300 w-screen Tech ">Node JS</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl hover:bg-orange-300 w-screen Tech ">Mongo DB</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl hover:bg-orange-300 w-screen Tech ">My Sql</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl hover:bg-orange-300 w-screen Tech ">Aws</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl hover:bg-orange-300 w-screen Tech ">Java</button>
+           
         </ul>
       </div>
+
+      <div class="container ">
+        <section class="bg-gray-950 mt-20 justify-center flex p-3 RoadMap">
+          <img class="flex cursor-pointer " alt="RoadMap Image">
+        </section>
+      </div>
        </main>
-       <footer class="flex mt-72 list-none gap-x-4 justify-center bg-orange-600 p-2">
-        <li class="align-baseline">© 2024 Portfolio™. All Rights Reserved.</li>
-        <li><a href="">Linkdin</a></li>
-        <li><a href="">Home</a></li>
-        <li><a href="">Home</a></li>
-        <li><a href="">Home</a></li>
+       <footer class="flex mt-72 list-none gap-x-4 justify-center bg-slate-800 p-2">
+        <li class="">© 2024 Portfolio™. All Rights Reserved.</li>
+        <li class="ml-2 footer"><a target="_blank">Linkdin</a></li>
+        <li class="ml-2 footer"><a target="_blank">Instagram</a></li>
+        <li class="ml-2 footer"><a target="_blank">Whatsapp</a></li>
+        <li class="ml-2 footer"><a>Home</a></li>
       </footer>
   </div>
 
 <!-- MobileView -->
-      <div class="container sm:hidden">
-       <div class="flex ">
+      <div class="sm:hidden">
+        <button id="hamburger" class="w-8"><img src="./img/burger-menu-svgrepo-com.svg" alt="hamburger" class=" ml-3 mt-3"></button>
+       <div class="flex">
         <nav class="">
-          <button id="hamburger" class="w-8"><img src="./img/burger-menu-svgrepo-com.svg" alt="hamburger" class=" ml-3 mt-3"></button>
-          <ul class=" bg-gray-950 w-16 py-4 rounded-md h-screen hidden ">
-            <li class="hover:text-gray-400 cursor-pointer  bg-gray-400 rounded-lg p-1 w-14 mt-3"><a href="./index.html">Home</a></li>
-            <li class="hover:text-gray-400 cursor-pointer mt-3"><a href="./html/About.html">About</a></li>
-            <li class="hover:text-gray-400 cursor-pointer mt-3"><a href="./html/Github.html">Github</a></li>
+          <ul class=" bg-gray-950 w-20 py-4 rounded-md h-screen hidden ">
+            <li class="hover:text-gray-400 cursor-pointer  bg-gray-400 rounded-lg p-1 w-14 mt-3"><a href="index.html">Home</a></li>
+            <li class="hover:text-gray-400 cursor-pointer mt-3"><a href="About.html">About</a></li>
+            <li class="hover:text-gray-400 cursor-pointer mt-3"><a href="Github.html">Github</a></li>
           </ul>
         </nav>
         <div class="flex flex-col">
-          <section id="avatar" class="ml-8 mt-5 bg-[#2121215a] mx-2 p-2 rounded-3xl translate-x-2 justify-center h-80 mt-0">
+          <section id="avatar" class="ml-8  bg-[#2121215a] mx-2 p-2 rounded-3xl translate-x-2 justify-center h-80 mt-0">
             <img class="shadow-md rounded-2xl w-72 h-72 " alt="the Image from Github">
           </section>
           <section class="">
@@ -73,21 +83,26 @@
             <h1 class="font-serif text-slate-200">Technical Skills</h1>
              </section>
              <section class="flex flex-col w-auto gap-3 text-center mt-4">
-              <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300">Javascript</button>
-            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300">React JS</button>
-            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300">Express JS</button>
-            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300">Node JS</button>
-            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300">Mongo DB</button>
-            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300">My Sql</button>
-            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300">Aws</button>
-            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300">Java</button>
+              <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300 Tech">Javascript</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300 Tech">React JS</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300 Tech">Express JS</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300 Tech">Node JS</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300 Tech">Mongo DB</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300 Tech">My Sql</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300 Tech">Aws</button>
+            <button class="font-mono bg-orange-500 p-2 rounded-xl focus:bg-orange-300 Tech">Java</button>
              </section>
+             <div class="container ">
+              <section class="bg-gray-950 mt-20 justify-center flex p-3 RoadMap">
+                <img class="flex cursor-pointer " alt="RoadMap Image">
+              </section>
+            </div>
              <footer class="flex flex-col bg-slate-800 mt-8 rounded-md list-none mx-0 p-2 text-md">
               <li class="">© 2024 Portfolio™. All Rights Reserved.</li>
-              <li class="ml-2"><a href="https://www.linkedin.com/in/atharv-shinde-a456b2152/">Linkdin</a></li>
-              <li class="ml-2"><a href="https://www.instagram.com/athu_3749/">Instagram</a></li>
-              <li class="ml-2"><a href="https://wa.me/8446848504">Whatsapp</a></li>
-              <li class="ml-2"><a href="#">Home</a></li>
+              <li class="ml-2"><a >Linkdin</a></li>
+              <li class="ml-2"><a >Instagram</a></li>
+              <li class="ml-2"><a >Whatsapp</a></li>
+              <li class="ml-2"><a >Home</a></li>
             </footer>
         </div>
        </div>
@@ -95,7 +110,7 @@
 
       
 </body>
-<script src="./Javascript/featchImg.js"></script>
-<script src="./Javascript/Info.js"></script>"
+<script src="./Javascript/Url.js"></script>
+<script src="./Javascript/Info.js"></script>
 <script src="./Javascript/hamFunctionality.js"></script>
 </html>

@@ -588,12 +588,17 @@ video {
   }
 }
 
-.relative {
-  position: relative;
-}
-
 .sticky {
   position: sticky;
+}
+
+.m-5 {
+  margin: 1.25rem;
+}
+
+.mx-0 {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .mx-1 {
@@ -611,8 +616,16 @@ video {
   margin-right: 5rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
 .ml-3 {
   margin-left: 0.75rem;
+}
+
+.ml-8 {
+  margin-left: 2rem;
 }
 
 .mt-0 {
@@ -623,8 +636,16 @@ video {
   margin-top: 0.5rem;
 }
 
+.mt-20 {
+  margin-top: 5rem;
+}
+
 .mt-3 {
   margin-top: 0.75rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .mt-5 {
@@ -641,18 +662,6 @@ video {
 
 .mt-8 {
   margin-top: 2rem;
-}
-
-.ml-6 {
-  margin-left: 1.5rem;
-}
-
-.ml-8 {
-  margin-left: 2rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
 }
 
 .block {
@@ -679,20 +688,20 @@ video {
   height: 100vh;
 }
 
-.w-1\/4 {
-  width: 25%;
+.w-0 {
+  width: 0px;
 }
 
-.w-10 {
-  width: 2.5rem;
+.w-1\/4 {
+  width: 25%;
 }
 
 .w-14 {
   width: 3.5rem;
 }
 
-.w-16 {
-  width: 4rem;
+.w-20 {
+  width: 5rem;
 }
 
 .w-72 {
@@ -703,20 +712,16 @@ video {
   width: 2rem;
 }
 
-.w-0 {
-  width: 0px;
-}
-
-.w-4 {
-  width: 1rem;
-}
-
 .w-auto {
   width: auto;
 }
 
-.flex-grow-0 {
-  flex-grow: 0;
+.w-full {
+  width: 100%;
+}
+
+.w-screen {
+  width: 100vw;
 }
 
 .translate-x-2 {
@@ -728,12 +733,36 @@ video {
   cursor: pointer;
 }
 
-.list-none {
-  list-style-type: none;
+.cursor-progress {
+  cursor: progress;
 }
 
-.flex-row-reverse {
-  flex-direction: row-reverse;
+.cursor-default {
+  cursor: default;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-row-resize {
+  cursor: row-resize;
+}
+
+.cursor-wait {
+  cursor: wait;
+}
+
+.cursor-text {
+  cursor: text;
+}
+
+.list-none {
+  list-style-type: none;
 }
 
 .flex-col {
@@ -756,16 +785,12 @@ video {
   justify-content: space-evenly;
 }
 
-.justify-items-center {
-  justify-items: center;
+.gap-3 {
+  gap: 0.75rem;
 }
 
 .gap-5 {
   gap: 1.25rem;
-}
-
-.gap-3 {
-  gap: 0.75rem;
 }
 
 .gap-x-4 {
@@ -775,6 +800,10 @@ video {
 
 .gap-y-4 {
   row-gap: 1rem;
+}
+
+.text-pretty {
+  text-wrap: pretty;
 }
 
 .rounded-2xl {
@@ -791,10 +820,6 @@ video {
 
 .rounded-md {
   border-radius: 0.375rem;
-}
-
-.rounded-sm {
-  border-radius: 0.125rem;
 }
 
 .rounded-xl {
@@ -820,29 +845,14 @@ video {
   background-color: rgb(3 7 18 / var(--tw-bg-opacity));
 }
 
-.bg-orange-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(234 88 12 / var(--tw-bg-opacity));
-}
-
 .bg-orange-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(249 115 22 / var(--tw-bg-opacity));
 }
 
-.bg-orange-400 {
+.bg-orange-600 {
   --tw-bg-opacity: 1;
-  background-color: rgb(251 146 60 / var(--tw-bg-opacity));
-}
-
-.bg-blue-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
-}
-
-.bg-slate-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
+  background-color: rgb(234 88 12 / var(--tw-bg-opacity));
 }
 
 .bg-slate-800 {
@@ -871,6 +881,10 @@ video {
   text-align: center;
 }
 
+.text-justify {
+  text-align: justify;
+}
+
 .align-baseline {
   vertical-align: baseline;
 }
@@ -879,16 +893,16 @@ video {
   vertical-align: middle;
 }
 
-.font-sans {
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 .font-serif {
   font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
-.font-mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+.text-\[1\.120rem\] {
+  font-size: 1.120rem;
 }
 
 .text-lg {
@@ -927,19 +941,14 @@ video {
   color: rgb(191 219 254 / var(--tw-text-opacity));
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .text-slate-200 {
   --tw-text-opacity: 1;
   color: rgb(226 232 240 / var(--tw-text-opacity));
 }
 
-.text-fuchsia-300 {
+.text-white {
   --tw-text-opacity: 1;
-  color: rgb(240 171 252 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .shadow-md {

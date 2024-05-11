@@ -3,9 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="../css/output.css">
 </head>
-<body>
-    
+<body class="bg-black text-white  ">
+    <nav class="flex list-none justify-around mt-5 bg-[#2121215a] p-3 rounded-3xl">
+        <li class="hover:text-gray-400 cursor-pointer"><a href="index.html">Home</a></li>
+        <li class="hover:text-gray-400 cursor-pointer  bg-gray-400 rounded-lg p-1"><a href="About.html">About</a></li>
+        <li class="hover:text-gray-400 cursor-pointer"><a href="Github.html">Github</a></li>
+          </nav>
+        <!-- nav ends here -->
+
+       <main class="">
+      <div class=" mt-6 flex justify-around mx-1">
+
+        <section class=" bg-[#2121215a] w-1/4 mt-3 justify-center block">
+          <h1 class="uppercase font-bold mx-20 mt-2 text-lg "> <b class="text-blue-200">Mern</b> Stack Developer</h1>
+          <li class="list-none p-3 justify-evenly capitalize ">Welcome to my portfolio! I'm a MERN stack developer passionate about crafting innovative web solutions. With expertise in MongoDB, Express.js, React.js, and Node.js, I specialize in building dynamic and responsive applications that elevate user experiences. From designing sleek user interfaces to implementing robust backend functionalities, I thrive on turning ideas into polished, functional products. Explore my portfolio to discover how I bring creativity and technical proficiency together to solve real-world problems.</li>
+         </section>
+        <section id="avatar" class=" bg-[#2121215a] mx-2 p-2 rounded-3xl translate-x-2 hover:animate-pulse tracking-widest">
+          <img class="shadow-md rounded-2xl w-72 h-72" alt="the Image from Github">
+        </section>
+      </div>
+      <!-- Technical Skills  -->
+      <div class="container justify-center flex">
+        <h1 class="text-xl hover:transition-all cursor-pointer">Technical Skills</h1>
+       
+      </div>
+     
+       </main>
+       <footer class="flex mt-72 list-none gap-x-4 justify-center bg-orange-600 p-2">
+        <li class="align-baseline">© 2024 Portfolio™. All Rights Reserved.</li>
+        <li><a href="">Linkdin</a></li>
+        <li><a href="">Home</a></li>
+        <li><a href="">Home</a></li>
+        <li><a href="">Home</a></li>
+      </footer>
+
 </body>
+<script>
+  const avatar=document.getElementById("avatar");
+  const photoFromGitHub=fetch("https://api.github.com/users/Atharva3749").then((Response)=>{return Response.json()}).then((data)=>{
+  const Imagesource=avatar.children[0];
+  const source=Imagesource.src=`${data.avatar_url}`
+  })
+</script>
 </html>
