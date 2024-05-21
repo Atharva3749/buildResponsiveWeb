@@ -1,4 +1,4 @@
-const URLS = [
+const Data =[
   (WebURL = {
     GitHub: "https://api.github.com/users/Atharva3749",
     Linkdin: "https://www.linkedin.com/in/atharv-shinde-a456b2152/",
@@ -17,9 +17,24 @@ const URLS = [
   (ImageURL = {
     RoadMap:
       "https://media.geeksforgeeks.org/wp-content/uploads/20240305101528/Roadmap-to-Mern-stack-developer-copy-(3).webp",
-  }),
+      HamBurger:
+      "../../img/burger-menu-svgrepo-com.svg"
+  })
 ];
-const photoFromGitHub = fetch(WebURL.GitHub)
+const ham=document.querySelector("#hamburger")
+ham.children[0].src=ImageURL.HamBurger
+const hamFunctionality =ham.nextElementSibling.children[0].children[0];
+
+ham.addEventListener('click',()=>{
+    if(hamFunctionality.classList.contains("hidden")){
+        hamFunctionality.classList.remove("hidden","w-0");
+    }
+    else{
+        hamFunctionality.classList.add("hidden","w-0");
+    }
+})
+
+ fetch(WebURL.GitHub)
   .then((Response) => {
     return Response.json();
   })
@@ -28,33 +43,28 @@ const photoFromGitHub = fetch(WebURL.GitHub)
       item.children[0].src = data.avatar_url;
     });
   });
-const MainImage = document.querySelectorAll(".RoadMap").forEach((item)=>{
-item.children[0].src=ImageURL.RoadMap;
-item.addEventListener("click",()=>(window.open(WebURL.RoadMap)))
-});
-const footer = document.querySelectorAll(".footer");
-footer[0].firstChild.href = WebURL.Linkdin;
-footer[1].firstChild.href = WebURL.Instagram;
-footer[2].firstChild.href = WebURL.Whatsapp;
-footer[3].firstChild.href = "#";
+// GitHUb
+  const MainImage = document.querySelectorAll(".RoadMap").forEach((item)=>{
+    item.children[0].src=ImageURL.RoadMap;
+    item.addEventListener("click",()=>(window.open(WebURL.RoadMap)))
+    });
+    const footer = document.querySelectorAll(".footer");
 
-   const TechnicalSkills=document.querySelectorAll(".Tech");
-        // DeskTopView
-   TechnicalSkills.item(0).addEventListener("click", () => window.open(WebURL.JavaScript))
-   TechnicalSkills.item(1).addEventListener("click", () => window.open(WebURL.React))
-   TechnicalSkills.item(2).addEventListener("click", () => window.open(WebURL.Express))
-   TechnicalSkills.item(3).addEventListener("click", () => window.open(WebURL.Node))
-   TechnicalSkills.item(4).addEventListener("click", () => window.open(WebURL.Mongo))
-   TechnicalSkills.item(5).addEventListener("click", () => window.open(WebURL.Sql))
-   TechnicalSkills.item(6).addEventListener("click", () => window.open(WebURL.Aws))
-   TechnicalSkills.item(7).addEventListener("click", () => window.open(WebURL.Java))
-        // Mobile View
-   TechnicalSkills.item(8).addEventListener("click", () => window.open(WebURL.JavaScript))
-   TechnicalSkills.item(9).addEventListener("click", () => window.open(WebURL.React))
-   TechnicalSkills.item(10).addEventListener("click", () => window.open(WebURL.Express))
-   TechnicalSkills.item(11).addEventListener("click", () => window.open(WebURL.Node))
-   TechnicalSkills.item(12).addEventListener("click", () => window.open(WebURL.Mongo))
-   TechnicalSkills.item(13).addEventListener("click", () => window.open(WebURL.Sql))
-   TechnicalSkills.item(14).addEventListener("click", () => window.open(WebURL.Aws))
-   TechnicalSkills.item(15).addEventListener("click", () => window.open(WebURL.Java))
-   
+    footer.forEach((item)=>{
+      item.children[1].children[0].href=WebURL.Linkdin
+      item.children[2].children[0].href=WebURL.Instagram
+      item.children[3].children[0].href=WebURL.Whatsapp
+      item.children[4].children[0].href="#"
+    })
+  
+       const TechnicalSkills=document.querySelectorAll(".Buttons");
+       TechnicalSkills.forEach((item)=>{
+        item.children[0].onclick=()=>window.open(WebURL.JavaScript)
+        item.children[1].onclick=()=>window.open(WebURL.React)
+        item.children[2].onclick=()=>window.open(WebURL.Express)
+        item.children[3].onclick=()=>window.open(WebURL.Node)
+        item.children[4].onclick=()=>window.open(WebURL.Mongo)
+        item.children[5].onclick=()=>window.open(WebURL.Sql)
+        item.children[6].onclick=()=>window.open(WebURL.Aws)
+        item.children[7].onclick=()=>window.open(WebURL.Java)
+       })
