@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atharv Shinde | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <!-- Replace your current GSAP imports with these -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollToPlugin.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        dark: '#0f172a',
+                        light: '#f8fafc',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-in',
+                        'text-gradient': 'textGradient 8s ease infinite',
+                        'gradient-x': 'gradientX 15s ease infinite',
+                        'gradient-y': 'gradientY 15s ease infinite',
+                        'gradient-xy': 'gradientXY 15s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        textGradient: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                        },
+                        gradientX: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                        },
+                        gradientY: {
+                            '0%, 100%': { 'background-position': '50% 0%' },
+                            '50%': { 'background-position': '50% 100%' },
+                        },
+                        gradientXY: {
+                            '0%, 100%': { 'background-position': '0% 0%' },
+                            '50%': { 'background-position': '100% 100%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899, #f43f5e);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textGradient 8s ease infinite;
+        }
+        
+        .card-gradient {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        
+        .project-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .project-card-inner {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
+        }
+        
+        .project-card:hover .project-card-inner {
+            transform: translateY(-10px) rotateX(3deg) rotateY(3deg);
+        }
+        
+        .project-card:hover::after {
+            opacity: 1;
+        }
+        
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--x) var(--y), rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+        
+        .hero-pattern {
+            background-image: radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+        
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: 3px solid #0f172a;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #6366f1, #8b5cf6, transparent);
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            top: 20%;
+            left: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #ec4899, #f43f5e);
+            bottom: 10%;
+            right: 10%;
+            animation: float 10s ease-in-out infinite 2s;
+        }
+        
+        .shape-3 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            top: 50%;
+            right: 20%;
+            animation: float 12s ease-in-out infinite 4s;
+        }
+        
+        .magnetic {
+            display: inline-block;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .magnetic:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background-size: 200% 200%;
+            animation: gradientX 8s ease infinite;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Floating Background Shapes -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-dark/80 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text magnetic">Atharv Shinde</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-light hover:text-primary transition magnetic">Home</a>
+                <a href="#about" class="nav-link text-light hover:text-primary transition magnetic">About</a>
+                <a href="#projects" class="nav-link text-light hover:text-primary transition magnetic">Projects</a>
+                <a href="#experience" class="nav-link text-light hover:text-primary transition magnetic">Experience</a>
+                <a href="#contact" class="nav-link text-light hover:text-primary transition magnetic">Contact</a>
+            </div>
+            <button class="md:hidden text-light focus:outline-none magnetic">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden hero-pattern">
+        <div class="absolute top-0 left-0 w-full h-full z-0 opacity-20">
+            <div class="absolute top-20 left-20 w-64 h-64 rounded-full bg-primary blur-3xl opacity-30 animate-float"></div>
+            <div class="absolute bottom-20 right-20 w-64 h-64 rounded-full bg-secondary blur-3xl opacity-30 animate-float" style="animation-delay: 2s;"></div>
+            <div class="absolute top-1/2 left-1/2 w-64 h-64 rounded-full bg-pink-500 blur-3xl opacity-20 animate-float" style="animation-delay: 4s;"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-6 py-24 z-10 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                <span class="gradient-text">Innovating</span> with Purpose
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">
+                I build intelligent systems that solve real-world challenges through AI, full-stack development, and user-centric design.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#projects" class="px-8 py-3 btn-gradient rounded-full font-medium hover:shadow-lg transition-all duration-300 magnetic">
+                    View Work
+                </a>
+                <a href="#contact" class="px-8 py-3 border border-gray-600 rounded-full font-medium hover:bg-gray-800 transition magnetic">
+                    Contact Me
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator">
+            <a href="#about" class="block w-10 h-16 rounded-full border-2 border-gray-400 flex items-center justify-center magnetic">
+                <div class="w-1 h-6 bg-gray-400 rounded-full animate-bounce"></div>
+            </a>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 section-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 relative">
+                    <div class="w-full h-full relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden border-4 border-primary/20 relative z-10">
+                            <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Atharv Shinde" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-64 h-64 md:w-80 md:h-80 rounded-2xl border-4 border-secondary/20 z-0"></div>
+                        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 -z-10"></div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 mt-10 md:mt-0">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 gradient-text inline-block">About Me</h2>
+                    <p class="text-lg text-gray-300 mb-6">
+                        I'm Atharv Shinde, a technologist and entrepreneur passionate about creating meaningful impact through innovation. I believe technology should solve real problems, empower communities, and drive progress.
+                    </p>
+                    <p class="text-lg text-gray-300 mb-8">
+                        As the founder of <span class="text-primary font-medium">Venture Technologies Pvt Ltd</span>, I bridge the gap between emerging technologies and practical applications. From healthcare AI to legal tech solutions, my work spans diverse domains with one constant—solving problems at scale.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-3">
+                                <i class="fas fa-laptop-code text-primary"></i>
+                            </div>
+                            <span class="font-medium">Full-Stack Dev</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mr-3">
+                                <i class="fas fa-brain text-secondary"></i>
+                            </div>
+                            <span class="font-medium">AI/ML Specialist</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center mr-3">
+                                <i class="fas fa-mobile-alt text-pink-500"></i>
+                            </div>
+                            <span class="font-medium">Mobile Developer</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center mr-3">
+                                <i class="fas fa-pencil-ruler text-purple-500"></i>
+                            </div>
+                            <span class="font-medium">UI/UX Designer</span>
+                        </div>
+                    </div>
+                    <a href="#" class="inline-flex items-center text-primary hover:text-secondary transition magnetic">
+                        <span class="mr-2">Download Resume</span>
+                        <i class="fas fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-dark/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text inline-block">Featured Projects</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">Explore some of my most impactful work across AI, mobile development, and web applications.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card rounded-xl overflow-hidden card-gradient">
+                    <div class="project-card-inner">
+                        <div class="relative overflow-hidden h-60">
+                            <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Law Link" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-xl font-bold text-light mb-2">Law Link</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">AI</span>
+                                    <span class="text-xs px-2 py-1 bg-secondary/20 text-secondary rounded-full">Android</span>
+                                    <span class="text-xs px-2 py-1 bg-pink-500/20 text-pink-500 rounded-full">LegalTech</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-300 mb-4">AI-powered legal consultation app connecting users with verified lawyers, featuring appointment booking, document management, and a legal chatbot.</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-sm font-medium text-primary hover:text-secondary transition magnetic">View Case Study →</a>
+                                <div class="flex space-x-3">
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card rounded-xl overflow-hidden card-gradient">
+                    <div class="project-card-inner">
+                        <div class="relative overflow-hidden h-60">
+                            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Breast Cancer Detection" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-xl font-bold text-light mb-2">Breast Cancer Detection</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">Deep Learning</span>
+                                    <span class="text-xs px-2 py-1 bg-secondary/20 text-secondary rounded-full">Healthcare</span>
+                                    <span class="text-xs px-2 py-1 bg-green-500/20 text-green-500 rounded-full">YOLOv5</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-300 mb-4">Advanced detection system using YOLOv5 and ResNet classifiers with radiomics analysis, achieving high accuracy in classifying malignant vs. benign masses.</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-sm font-medium text-primary hover:text-secondary transition magnetic">View Case Study →</a>
+                                <div class="flex space-x-3">
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card rounded-xl overflow-hidden card-gradient">
+                    <div class="project-card-inner">
+                        <div class="relative overflow-hidden h-60">
+                            <img src="https://images.unsplash.com/photo-1614680376573-df3480f0c6ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Sign Language Recognition" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-xl font-bold text-light mb-2">ISL Recognition</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">Computer Vision</span>
+                                    <span class="text-xs px-2 py-1 bg-secondary/20 text-secondary rounded-full">Accessibility</span>
+                                    <span class="text-xs px-2 py-1 bg-yellow-500/20 text-yellow-500 rounded-full">OpenCV</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-300 mb-4">Real-time Indian Sign Language recognition system using custom CNN architecture with text and speech output for hearing-impaired communication.</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-sm font-medium text-primary hover:text-secondary transition magnetic">View Case Study →</a>
+                                <div class="flex space-x-3">
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 4 -->
+                <div class="project-card rounded-xl overflow-hidden card-gradient">
+                    <div class="project-card-inner">
+                        <div class="relative overflow-hidden h-60">
+                            <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1425&q=80" alt="Virtual Fitting Room" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-xl font-bold text-light mb-2">Virtual Fitting Room</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">AR</span>
+                                    <span class="text-xs px-2 py-1 bg-secondary/20 text-secondary rounded-full">FashionTech</span>
+                                    <span class="text-xs px-2 py-1 bg-purple-500/20 text-purple-500 rounded-full">MediaPipe</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-300 mb-4">Web app for virtual clothing try-on using pose detection and image processing, enhancing e-commerce engagement with realistic fashion trials.</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-sm font-medium text-primary hover:text-secondary transition magnetic">View Case Study →</a>
+                                <div class="flex space-x-3">
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 5 -->
+                <div class="project-card rounded-xl overflow-hidden card-gradient">
+                    <div class="project-card-inner">
+                        <div class="relative overflow-hidden h-60">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Ashvadhenu" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-xl font-bold text-light mb-2">Ashvadhenu</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">Mobile</span>
+                                    <span class="text-xs px-2 py-1 bg-secondary/20 text-secondary rounded-full">Agriculture</span>
+                                    <span class="text-xs px-2 py-1 bg-green-500/20 text-green-500 rounded-full">Kotlin</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-300 mb-4">Livestock management app for farmers with offline-first architecture, health tracking, and production monitoring for cows, goats, and buffaloes.</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-sm font-medium text-primary hover:text-secondary transition magnetic">View Case Study →</a>
+                                <div class="flex space-x-3">
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 6 -->
+                <div class="project-card rounded-xl overflow-hidden card-gradient">
+                    <div class="project-card-inner">
+                        <div class="relative overflow-hidden h-60">
+                            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="AR Campus Navigation" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/40 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-6">
+                                <h3 class="text-xl font-bold text-light mb-2">AR Campus Navigation</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full">Augmented Reality</span>
+                                    <span class="text-xs px-2 py-1 bg-secondary/20 text-secondary rounded-full">Unity</span>
+                                    <span class="text-xs px-2 py-1 bg-blue-500/20 text-blue-500 rounded-full">ARCore</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-300 mb-4">Augmented reality app for university campuses with indoor/outdoor navigation, building recognition, and AR labels for easy wayfinding.</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#" class="text-sm font-medium text-primary hover:text-secondary transition magnetic">View Case Study →</a>
+                                <div class="flex space-x-3">
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic"><i class="fas fa-external-link-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="#" class="px-8 py-3 border border-gray-600 rounded-full font-medium hover:bg-gray-800 transition magnetic inline-flex items-center">
+                    <span class="mr-2">View All Projects</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 section-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text inline-block">Experience & Education</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">My journey through entrepreneurship, research, and continuous learning.</p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="relative timeline pl-8">
+                    <!-- Item 1 -->
+                    <div class="relative timeline-item mb-12">
+                        <div class="p-6 rounded-xl card-gradient border border-gray-800">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-light">Founder & CEO</h3>
+                                <span class="text-sm bg-primary/20 text-primary px-3 py-1 rounded-full">2021 - Present</span>
+                            </div>
+                            <h4 class="text-lg text-secondary mb-3">Venture Technologies Pvt Ltd</h4>
+                            <p class="text-gray-300">
+                                Founded a technology company focused on bridging the gap between emerging technologies and practical applications. Lead a team developing AI, AR, and full-stack solutions for healthcare, legal, and agricultural sectors.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="relative timeline-item mb-12">
+                        <div class="p-6 rounded-xl card-gradient border border-gray-800">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-light">Breast Cancer Detection Research</h3>
+                                <span class="text-sm bg-secondary/20 text-secondary px-3 py-1 rounded-full">2022 - 2023</span>
+                            </div>
+                            <h4 class="text-lg text-primary mb-3">Independent Research Project</h4>
+                            <p class="text-gray-300">
+                                Developed an advanced detection system combining YOLOv5, ResNet classifiers, and radiomics analysis. Achieved high accuracy in classifying malignant vs. benign masses with explainable AI modules for clinical interpretability.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 3 -->
+                    <div class="relative timeline-item mb-12">
+                        <div class="p-6 rounded-xl card-gradient border border-gray-800">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-light">Bachelor's in Computer Science</h3>
+                                <span class="text-sm bg-pink-500/20 text-pink-500 px-3 py-1 rounded-full">2018 - 2022</span>
+                            </div>
+                            <h4 class="text-lg text-light mb-3">University of Pune</h4>
+                            <p class="text-gray-300">
+                                Specialized in software development, data structures, machine learning, and electronics. Participated in hackathons, research projects, and student organizations, refining collaborative and leadership skills.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 4 -->
+                    <div class="relative timeline-item">
+                        <div class="p-6 rounded-xl card-gradient border border-gray-800">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-light">AI/ML Mentor</h3>
+                                <span class="text-sm bg-purple-500/20 text-purple-500 px-3 py-1 rounded-full">2020 - Present</span>
+                            </div>
+                            <h4 class="text-lg text-light mb-3">Freelance</h4>
+                            <p class="text-gray-300">
+                                Conduct sessions on deep learning fundamentals, project design, and industry-ready techniques. Mentor students in building complete software pipelines from ideation to deployment.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section class="py-20 bg-dark/50 section-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text inline-block">Technical Skills</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">The tools and technologies I use to bring ideas to life.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                <!-- Skill 1 -->
+                <div class="p-6 rounded-xl card-gradient border border-gray-800 text-center hover:border-primary/50 transition magnetic">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-primary/10 rounded-full text-3xl text-primary">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">React.js</h3>
+                    <p class="text-sm text-gray-400">Frontend Development</p>
+                </div>
+                
+                <!-- Skill 2 -->
+                <div class="p-6 rounded-xl card-gradient border border-gray-800 text-center hover:border-secondary/50 transition magnetic">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-secondary/10 rounded-full text-3xl text-secondary">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Node.js</h3>
+                    <p class="text-sm text-gray-400">Backend Development</p>
+                </div>
+                
+                <!-- Skill 3 -->
+                <div class="p-6 rounded-xl card-gradient border border-gray-800 text-center hover:border-pink-500/50 transition magnetic">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-pink-500/10 rounded-full text-3xl text-pink-500">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">TensorFlow</h3>
+                    <p class="text-sm text-gray-400">Machine Learning</p>
+                </div>
+                
+                <!-- Skill 4 -->
+                <div class="p-6 rounded-xl card-gradient border border-gray-800 text-center hover:border-yellow-500/50 transition magnetic">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-yellow-500/10 rounded-full text-3xl text-yellow-500">
+                        <i class="fab fa-android"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Android</h3>
+                    <p class="text-sm text-gray-400">Mobile Development</p>
+                </div>
+                
+                <!-- Skill 5 -->
+                <div class="p-6 rounded-xl card-gradient border border-gray-800 text-center hover:border-green-500/50 transition magnetic">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-green-500/10 rounded-full text-3xl text-green-500">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">MongoDB</h3>
+                    <p class="text-sm text-gray-400">Database</p>
+                </div>
+                
+                <!-- Skill 6 -->
+                <div class="p-6 rounded-xl card-gradient border border-gray-800 text-center hover:border-blue-500/50 transition magnetic">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-blue-500/10 rounded-full text-3xl text-blue-500">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Firebase</h3>
+                    <p class="text-sm text-gray-400">Backend Services</p>
+                </div>
+                
+                <!-- Skill 7 -->
+                <div class="p-6 rounded-xl card-gradient border border-gray-800 text-center hover:border-purple-500/50 transition magnetic">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-purple-500/10 rounded-full text-3xl text-purple-500">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Python</h3>
+                    <p class="text-sm text-gray-400">Programming</p>
+                </div>
+                
+                <!-- Skill 8 -->
+                <div class="p-6 rounded-xl card-gradient border border-gray-800 text-center hover:border-red-500/50 transition magnetic">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-red-500/10 rounded-full text-3xl text-red-500">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Three.js</h3>
+                    <p class="text-sm text-gray-400">3D Web</p>
+                </div>
+                
+                <!-- Skill 9 -->
+                <div class="p-6 rounded-xl card-gradient border border-gray-800 text-center hover:border-indigo-500/50 transition magnetic">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-indigo-500/10 rounded-full text-3xl text-indigo-500">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">OpenCV</h3>
+                    <p class="text-sm text-gray-400">Computer Vision</p>
+                </div>
+                
+                <!-- Skill 10 -->
+                <div class="p-6 rounded-xl card-gradient border border-gray-800 text-center hover:border-teal-500/50 transition magnetic">
+                    <div class="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-teal-500/10 rounded-full text-3xl text-teal-500">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">AWS</h3>
+                    <p class="text-sm text-gray-400">Cloud Services</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 section-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 gradient-text inline-block">Get In Touch</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">Have a project in mind or want to collaborate? I'd love to hear from you.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 bg-dark/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 bg-dark/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-300 mb-2">Subject</label>
+                            <input type="text" id="subject" class="w-full px-4 py-3 bg-dark/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="Project Inquiry">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message</label>
+                            <textarea id="message" rows="5" class="w-full px-4 py-3 bg-dark/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition" placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 btn-gradient rounded-lg font-medium hover:shadow-lg transition-all duration-300 magnetic">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="p-8 rounded-xl card-gradient border border-gray-800 h-full">
+                        <h3 class="text-2xl font-bold mb-6 gradient-text inline-block">Contact Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-envelope text-primary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-300 mb-1">Email</h4>
+                                    <a href="mailto:hr@venturetech.co.in" class="text-gray-400 hover:text-primary transition magnetic">hr@venturetech.co.in</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-map-marker-alt text-secondary"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-300 mb-1">Location</h4>
+                                    <p class="text-gray-400">Gira Imperium, Kharadi, Pune</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center mr-4 mt-1">
+                                    <i class="fas fa-globe text-pink-500"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-300 mb-1">Website</h4>
+                                    <a href="#" class="text-gray-400 hover:text-primary transition magnetic">venturetech.co.in</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-10">
+                            <h4 class="font-medium text-gray-300 mb-4">Connect With Me</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-primary hover:text-white transition magnetic">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-gray-700 hover:text-white transition magnetic">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-blue-500 hover:text-white transition magnetic">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-300 hover:bg-pink-600 hover:text-white transition magnetic">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold gradient-text magnetic">Atharv Shinde</a>
+                    <p class="text-gray-400 mt-2">Innovating with purpose, building with passion.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#home" class="text-gray-400 hover:text-primary transition magnetic">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-primary transition magnetic">About</a>
+                    <a href="#projects" class="text-gray-400 hover:text-primary transition magnetic">Projects</a>
+                    <a href="#contact" class="text-gray-400 hover:text-primary transition magnetic">Contact</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
+                <p>© 2023 Atharv Shinde. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Animate sections on scroll
+        gsap.utils.toArray('.section-hidden').forEach(section => {
+            gsap.fromTo(section, 
+                { opacity: 0, y: 50 },
+                { 
+                    opacity: 1, 
+                    y: 0,
+                    duration: 1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        });
+        
+        // Animate project cards with stagger
+        gsap.utils.toArray('.project-card').forEach((card, i) => {
+            gsap.fromTo(card, 
+                { opacity: 0, y: 50 },
+                { 
+                    opacity: 1, 
+                    y: 0,
+                    duration: 0.8,
+                    delay: i * 0.1,
+                    ease: "back.out(1.7)",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 90%",
+                        toggleActions: "play none none none"
+                    },
+                    onComplete: () => card.classList.add('visible')
+                }
+            );
+        });
+        
+        // Smooth scrolling for navigation links
+    // Replace the smooth scrolling code with this:
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - 80;
+            
+            gsap.to(window, {
+                duration: 1,
+                scrollTo: targetPosition,
+                ease: "power3.inOut"
+            });
+        }
+    });
+});
+        // Magnetic effect for interactive elements
+        const magneticElements = document.querySelectorAll('.magnetic');
+        
+        magneticElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const angleX = (x - centerX) / 10;
+                const angleY = (y - centerY) / 10;
+                
+                gsap.to(el, {
+                    x: angleX,
+                    y: angleY,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            });
+            
+            el.addEventListener('mouseleave', () => {
+                gsap.to(el, {
+                    x: 0,
+                    y: 0,
+                    duration: 0.7,
+                    ease: "elastic.out(1, 0.5)"
+                });
+            });
+        });
+        
+        // Project card hover effect with light follow
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        projectCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const angleX = (x - centerX) / 20;
+                const angleY = (centerY - y) / 20;
+                
+                gsap.to(card.querySelector('.project-card-inner'), {
+                    rotationY: angleX,
+                    rotationX: angleY,
+                    transformPerspective: 1000,
+                    ease: "power2.out",
+                    duration: 0.5
+                });
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                gsap.to(card.querySelector('.project-card-inner'), {
+                    rotationY: 0,
+                    rotationX: 0,
+                    ease: "elastic.out(1, 0.5)",
+                    duration: 1
+                });
+                
+                gsap.to(card, {
+                    '--x': '50%',
+                    '--y': '50%',
+                    duration: 0.5
+                });
+            });
+        });
+        
+        // Floating background shapes animation
+        gsap.to('.shape-1', {
+            y: 50,
+            duration: 10,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+        
+        gsap.to('.shape-2', {
+            x: 50,
+            duration: 15,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+        
+        gsap.to('.shape-3', {
+            x: -30,
+            y: 30,
+            duration: 12,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+    </script>
+</body>
+</html>
